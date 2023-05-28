@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Jack Dorland: aspiring law student, author, and researcher.">
+  <title>Jack Dorland</title>
+
+  <link href="assets/stylesheets/default.css" rel="stylesheet">
+  <link href="assets/stylesheets/index.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="paper">
+    <div class="text-container">
+      <header class="rotate">
+        <p class="top-header">
+          <span class="jp-header">ジャック・どろぁんど</span><br>
+          <span id="date">January 1, 1970</span>
+        </p>
+        <span>jack "kai" dorland (he/they)</span>
+      </header>
+
+      <main>
+        <div class="is rotate">
+          <p>aspiring law student,<br> author, and researcher</p>
+          <img class="arrow" src="./assets/images/arrow1.svg"
+            alt='Arrow pointing left towards "aspiring law student, author, and researcher"' />
+          <p class="jp">ほうがくせい<br>
+            研究者・作家</p>
+        </div>
+
+        <div class="middle">
+          <div class="flex">
+            <img class="polaroids" src="./assets/images/polaroids.webp"
+              alt="Two images. One of a pink cherry blossom tree, and one of a lake.">
+            <div>
+              <nav class="rotate">
+                <ul>
+                  <li><a href="/about.html">about</a></li>
+                  <li><a href="/blog.html">pens, pencils, and<br> politics blog</a></li>
+                  <li>contact me:<br>
+                    <a href="mailto:jack@jackdor.land">jack@jackdor.land</a>
+                  </li>
+                  <li id="langs">English or <span class="jp">日本語</span></li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+          <div id="recent-blog-posts">
+            <p>recent blog post:</p>
+	    $partial("templates/recent-post.html")$	
+          </div>
+        </div>
+      </main>
+
+      <footer class="rotate">
+        <span class="boring">つまらない！！</span>
+        <img src="./assets/images/arrow2.svg" alt="Arrow pointing right, towards copyright information">
+        <p><span id="copyright">copyright 2023 jack dorland,</span><br>
+          opinions expressed are solely my own and do not express the views or opinions of
+          my university or employer</p>
+      </footer>
+      </main>
+    </div>
+    <img src="./assets/images/paper.svg" alt="A background image of a piece of paper.">
+  </div>
+
+  <img id="pens-and-pencils" src="./assets/images/pens-and-pencils.webp"
+    alt="A graphic of mixed pens, pencils, and other stationary.">
+  <script src="./assets/scripts.js"></script>
+</body>
+
+</html>

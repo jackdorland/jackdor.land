@@ -1,0 +1,80 @@
+body {
+    padding: 3rem 14.5rem;
+    padding-bottom: 0px;
+}
+
+#paper {
+    background-image: url("../images/paper2.svg");
+    margin: 0 auto;
+    padding: 3rem 6rem;
+    width: 100%;
+    height: fit-content;
+    border-radius: 29px 29px 0px 0px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+}
+
+main {
+    display: flex;
+    justify-content: space-between;
+}
+
+h1, h2, h3 {
+    font-weight: normal;
+    padding: 0;
+    margin: 0;
+}
+
+a {
+    color: #0729C8;
+}
+
+.other-articles {
+    max-width: 300px;
+    padding-top: 2px;
+    margin-top: 0;
+    text-align: right;
+    list-style: none;
+}
+
+.other-articles a {
+    display: block;
+    margin: 0px 0;
+    line-height: 32px;
+}
+
+.jp-header {
+    font-size: 50px;
+    padding: 0;
+    margin: -7px 0 0 0;
+}
+
+.jp-header + p {
+    margin: -7px 0 0 0;
+    padding: 0;
+}
+
+nav {
+    font-size: 40px;
+}
+
+article p {
+    margin-bottom: 32px;
+    font-size: 26px;
+}
+
+article {
+    margin-top: 32px;
+    margin-left: 10px;
+    max-width: 650px;
+    line-height: 32px;
+}
+
+#polaroid {
+    width: 300px;
+    height: auto;
+    border: #979797 solid 1px;
+}
