@@ -38,6 +38,7 @@ a {
     margin-top: 0;
     text-align: right;
     list-style: none;
+    line-height: 32px;
 }
 
 .other-articles a {
@@ -77,4 +78,5 @@ article {
     width: 300px;
     height: auto;
     border: #979797 solid 1px;
+    margin-bottom: 10px;
 }
