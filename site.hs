@@ -25,7 +25,10 @@ import Hakyll
       loadAndApplyTemplate,
       templateBodyCompiler,
       recentFirst,
-      Context )
+      Context,
+      version,
+      hasVersion,
+      (.&&.))
 
 --------------------------------------------------------------------------------
 main :: IO ()
@@ -42,19 +45,24 @@ main = hakyll $ do
     route idRoute
     compile compressCssCompiler
   
-  match "posts/*.md" $ do
+  match "posts/*.md" $ version "init" $ do
     route $ setExtension "html"
     compile $ do
-      posts <- recentFirst =<< loadAllSnapshots "posts/*" "content"
+      pandocCompiler
+        >>= saveSnapshot "content"
+        >>= relativizeUrls
+
+  match "posts/*.md" $ version "final" $ do
+    route $ setExtension "html"
+    compile $ do
+      posts <- recentFirst =<< loadAllSnapshots ("posts/*" .&&. hasVersion "init") "content"
       let otherBlogPostsCtx = 
-           dateField "date" "%B %e, %y" `mappend`
             listField "posts" defaultPostCtx (return posts) `mappend`
-            defaultContext
+            defaultPostCtx
 
       pandocCompiler
-        >>= applyAsTemplate otherBlogPostsCtx
         >>= saveSnapshot "content"
-        >>= loadAndApplyTemplate "templates/post.html" defaultPostCtx
+        >>= loadAndApplyTemplate "templates/post.html" otherBlogPostsCtx
         >>= relativizeUrls
 
   match "index.html" $ do
@@ -73,7 +81,7 @@ main = hakyll $ do
   match "blog.html" $ do
     route idRoute
     compile $ do
-      posts <- recentFirst =<< loadAll "posts/*"
+      posts <- recentFirst =<< loadAll ("posts/*" .&&. hasVersion "final")
       let blogPostsCtx =
             listField "posts" defaultPostCtx (return posts)
               `mappend` defaultContext
