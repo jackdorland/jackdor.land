@@ -33,15 +33,13 @@ h1 {
     font-weight: normal;
 }
 
-#past-posts {
-    line-height: 32px;
-}
-
 #past-posts ul {
-    padding-top: 2px;
+    padding-top: 4px;
     margin-top: 0;
     text-align: right;
     list-style: none;
+    line-height: 32px;
+    letter-spacing: -0.04em;
 }
 
 #past-posts li {

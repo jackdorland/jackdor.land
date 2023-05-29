@@ -2,11 +2,16 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Jack Dorland: aspiring law student, author, and researcher.">
-  <title>Jack Dorland</title>
+  $partial("templates/partials/metadata-shared.html")$
+
+  <meta property="og:title" content="Jack Dorland">
+  <meta property="og:site_name" content="jackdor.land">
+  <meta property="og:url" content="https://jackdor.land/index.html">
+  <meta property="og:description" content="Aspiring law student, author, researcher, and enthusiast of fine writing utencils.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+
+  <title>jackdor.land</title>
 
   <link href="assets/stylesheets/default.css" rel="stylesheet">
   <link href="assets/stylesheets/index.css" rel="stylesheet">
@@ -51,7 +56,7 @@
           </div>
           <div id="recent-blog-posts">
             <p>recent blog post:</p>
-	    $partial("templates/recent-post.html")$	
+	          $partial("templates/partials/recent-post.html")$	
           </div>
         </div>
       </main>
