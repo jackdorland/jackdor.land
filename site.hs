@@ -3,32 +3,33 @@
 
 import Data.Monoid (mappend)
 import Hakyll
-    ( getResourceBody,
-      saveSnapshot,
-      loadAll,
-      loadAllSnapshots,
-      copyFileCompiler,
-      idRoute,
-      setExtension,
-      compile,
-      match,
-      route,
-      hakyll,
-      compressCssCompiler,
-      relativizeUrls,
-      pandocCompiler,
-      dateField,
-      defaultContext,
-      listField,
-      teaserField,
-      applyAsTemplate,
-      loadAndApplyTemplate,
-      templateBodyCompiler,
-      recentFirst,
-      Context,
-      version,
-      hasVersion,
-      (.&&.))
+  ( Context,
+    applyAsTemplate,
+    compile,
+    compressCssCompiler,
+    copyFileCompiler,
+    dateField,
+    defaultContext,
+    getResourceBody,
+    hakyll,
+    hasVersion,
+    idRoute,
+    listField,
+    loadAll,
+    loadAllSnapshots,
+    loadAndApplyTemplate,
+    match,
+    pandocCompiler,
+    recentFirst,
+    relativizeUrls,
+    route,
+    saveSnapshot,
+    setExtension,
+    teaserField,
+    templateBodyCompiler,
+    version,
+    (.&&.),
+  )
 
 --------------------------------------------------------------------------------
 main :: IO ()
@@ -44,7 +45,7 @@ main = hakyll $ do
   match "assets/stylesheets/*" $ do
     route idRoute
     compile compressCssCompiler
-  
+
   match "posts/*.md" $ version "init" $ do
     route $ setExtension "html"
     compile $ do
@@ -56,9 +57,11 @@ main = hakyll $ do
     route $ setExtension "html"
     compile $ do
       posts <- recentFirst =<< loadAllSnapshots ("posts/*" .&&. hasVersion "init") "content"
-      let otherBlogPostsCtx = 
-            listField "posts" defaultPostCtx (return posts) `mappend`
-            defaultPostCtx
+      let otherBlogPostsCtx =
+            dateField "date" "%B %e, %y"
+              `mappend` listField "posts" defaultPostCtx (return posts)
+              `mappend` defaultContext
+              `mappend` defaultPostCtx
 
       pandocCompiler
         >>= saveSnapshot "content"
@@ -91,7 +94,7 @@ main = hakyll $ do
         >>= loadAndApplyTemplate "templates/blog.html" blogPostsCtx
         >>= relativizeUrls
 
-  match "templates/*" $ compile templateBodyCompiler
+  match "templates/**" $ compile templateBodyCompiler
 
 --------------------------------------------------------------------------------
 defaultPostCtx :: Context String
@@ -99,5 +102,6 @@ defaultPostCtx =
   dateField "date" "%B %e, %Y"
     `mappend` defaultContext
 
+teaserCtx :: Context String
 teaserCtx =
   teaserField "teaser" "content" `mappend` defaultPostCtx

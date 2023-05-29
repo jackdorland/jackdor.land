@@ -2,10 +2,15 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Jack Dorland: aspiring law student, author, and researcher.">
+  $partial("templates/partials/metadata-shared.html")$
+
+  <meta property="og:title" content="pens, pencils & politics">
+  <meta property="og:site_name" content="jackdor.land">
+  <meta property="og:url" content="https://jackdor.land/blog.html">
+  <meta property="og:description" content="personal blog with posts about, you guessed it, pens, pencils and politics!">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="en_US">
+  
   <title>Jack Dorland</title>
 
   <link href="assets/stylesheets/default.css" rel="stylesheet">
@@ -32,7 +37,7 @@
       <main>
         <section id="posts">
           <h1>pens, pencils, &amp; politics</h1>
-          $partial("templates/post-list.html")$
+          $partial("templates/partials/post-list.html")$
 	</section>
         <aside id="past-posts">
           <h1>past posts</h1>

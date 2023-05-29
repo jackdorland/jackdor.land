@@ -39,6 +39,11 @@ a {
     text-align: right;
     list-style: none;
     line-height: 32px;
+    list-style-type: none !important;
+}
+
+.other-articles ul, li {
+    list-style-type: none !important;
 }
 
 .other-articles a {
@@ -80,4 +85,8 @@ article {
     height: auto;
     border: #979797 solid 1px;
     margin-bottom: 10px;
+}
+
+#article p {
+    margin-top: 32px;
 }
