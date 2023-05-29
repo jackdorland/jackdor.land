@@ -1,5 +1,5 @@
 ---
-title: 'Pentel Orenz AT 0.5mm 2023 First Impressions'
+title: 'First Impressions: Pentel Orenz AT'
 author: 'Jack Dorland'
 date: 'April 19th, 2023'
 ---
