@@ -22,3 +22,7 @@ This website follows a fairly standard Hakyll file structure.
   - partials → partial Hakyll templates for post listings & metadata
 
 Within [*site.hs*](site.hs) lies the Hakyll definitions and setup file which defines routes and compilers for said routes.
+
+## Installation
+
+Ensure you have the Haskell toolchain installed and simply clone this repo. Run `stack build && stack exec site watch` in the root repository directory to start a local server at `localhost:8000`.
