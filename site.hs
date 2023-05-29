@@ -57,9 +57,8 @@ main = hakyll $ do
     compile $ do
       posts <- recentFirst =<< loadAllSnapshots ("posts/*" .&&. hasVersion "init") "content"
       let otherBlogPostsCtx = 
-           dateField "date" "%B %e, %y" `mappend`
             listField "posts" defaultPostCtx (return posts) `mappend`
-            defaultContext `mappend` defaultPostCtx
+            defaultPostCtx
 
       pandocCompiler
         >>= saveSnapshot "content"
