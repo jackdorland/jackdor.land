@@ -2,11 +2,16 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Jack Dorland: aspiring law student, author, and researcher.">
-  <title>Jack Dorland</title>
+  $partial("templates/partials/metadata-shared.html")$
+  
+  <meta property="og:title" content="$title$">
+  <meta property="og:site_name" content="jackdor.land">
+  <meta property="og:url" content="$url$">
+  <meta property="og:description" content="n/a"> <!-- todo: fill in teaser from hakyll -->
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="en_US">
+
+  <title>$title$</title>
 
   <link href="../assets/stylesheets/default.css" rel="stylesheet">
   <link href="../assets/stylesheets/post.css" rel="stylesheet">
@@ -27,17 +32,17 @@
     </header>
     <main>
       <article id="post">
-	<h1>$title$</h1><br>
+        <h1>$title$</h1><br>
         <h3>$author$ ~ $date$</h3>
-	$body$ 
+        <span id="article">$body$ </span>
       </article>
       <aside>
         <img id="polaroid" src="https://via.placeholder.com/300">
         <div class="other-articles">
           <h3>Other Articles</h3>
-	$partial("templates/post-list.html")$	
+          $partial("templates/partials/other-posts.html")$
 
-	</div>
+        </div>
       </aside>
     </main>
   </div>

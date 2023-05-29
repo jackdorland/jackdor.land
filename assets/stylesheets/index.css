@@ -85,10 +85,18 @@ footer p {
     font-size: 30px;
 }
 
+#recent-blog-posts .teaser p {
+    padding-top: 0px;
+    transform: translateY(-2px);
+    font-size: 24px;
+    line-height: 0.8em;
+}
+
 #recent-blog-posts ul {
     padding-left: 10px;
     line-height: 0.8em;
     width: 90%;
+    font-size: 24px;
 }
 
 .polaroids {
