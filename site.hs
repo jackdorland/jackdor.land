@@ -3,6 +3,7 @@
 
 import Data.Monoid (mappend)
 import Hakyll
+{-
     ( getResourceBody,
       saveSnapshot,
       loadAll,
@@ -26,7 +27,7 @@ import Hakyll
       templateBodyCompiler,
       recentFirst,
       Context )
-
+-}
 --------------------------------------------------------------------------------
 main :: IO ()
 main = hakyll $ do
@@ -42,19 +43,27 @@ main = hakyll $ do
     route idRoute
     compile compressCssCompiler
   
+  match "posts/*.md" $ version "init" $ do
+    route $ setExtension "html"
+    compile $ do
+      pandocCompiler
+        >>= saveSnapshot "content"
+        >>= relativizeUrls
+
   match "posts/*.md" $ do
     route $ setExtension "html"
     compile $ do
-      posts <- recentFirst =<< loadAllSnapshots "posts/*" "content"
+      posts <- recentFirst =<< loadAllSnapshots ("posts/*" .&&. hasVersion "init") "content"
       let otherBlogPostsCtx = 
            dateField "date" "%B %e, %y" `mappend`
             listField "posts" defaultPostCtx (return posts) `mappend`
-            defaultContext
+            defaultContext `mappend` defaultPostCtx
 
       pandocCompiler
-        >>= applyAsTemplate otherBlogPostsCtx
         >>= saveSnapshot "content"
-        >>= loadAndApplyTemplate "templates/post.html" defaultPostCtx
+        -- >>= applyAsTemplate otherBlogPostsCtx
+        -- >>= saveSnapshot "content"
+        >>= loadAndApplyTemplate "templates/post.html" otherBlogPostsCtx
         >>= relativizeUrls
 
   match "index.html" $ do
