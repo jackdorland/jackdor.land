@@ -291,7 +291,7 @@ body {
 
 body {
     background-color: #f8c8dc;
-    font-family: "left-handed_girlfriend";
+    font-family: "left-handed_girlfriend", monospace;
     font-size: 30px;
     letter-spacing: -0.07em;
     font-weight: 500;

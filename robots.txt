@@ -1,0 +1,3 @@
+User-Agent: *
+Sitemap: https://jackdor.land/sitemap.xml
+

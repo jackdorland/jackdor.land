@@ -3,49 +3,31 @@
 
 import Data.Monoid (mappend)
 import Hakyll
-  ( Context,
-    applyAsTemplate,
-    compile,
-    compressCssCompiler,
-    copyFileCompiler,
-    dateField,
-    defaultContext,
-    getResourceBody,
-    hakyll,
-    hasVersion,
-    idRoute,
-    listField,
-    loadAll,
-    loadAllSnapshots,
-    loadAndApplyTemplate,
-    match,
-    pandocCompiler,
-    recentFirst,
-    relativizeUrls,
-    route,
-    saveSnapshot,
-    setExtension,
-    teaserField,
-    templateBodyCompiler,
-    version,
-    (.&&.),
-  )
+import Data.Foldable (forM_)
 
 --------------------------------------------------------------------------------
 main :: IO ()
 main = hakyll $ do
-  match "assets/*" $ do
+  -- sitemap
+  create ["sitemap.xml"] $ do
     route idRoute
-    compile copyFileCompiler
+    compile $ do
+      posts <- recentFirst =<< loadAll "posts/*"
+      singlePages <- loadAll (fromList ["blog.html", "index.html", "about.html", "robots.html"])
 
-  match "assets/images/*" $ do
-    route idRoute
-    compile copyFileCompiler
+      let pages = posts <> singlePages
+          sitemapCtx =
+            constField "root" root
+              <> listField "pages" defaultPostCtx (return pages)
+      makeItem ""
+        >>= loadAndApplyTemplate "templates/sitemap.xml" sitemapCtx
 
+  -- css compression
   match "assets/stylesheets/*" $ do
     route idRoute
     compile compressCssCompiler
 
+  -- post generation
   match "posts/*.md" $ version "staging" $ do
     route $ setExtension "html"
     compile $ do
@@ -59,53 +41,66 @@ main = hakyll $ do
       posts <- recentFirst =<< loadAllSnapshots ("posts/*" .&&. hasVersion "staging") "content"
       let otherBlogPostsCtx =
             dateField "date" "%B %e, %Y"
-              `mappend` listField "posts" defaultPostCtx (return posts)
-              `mappend` defaultContext
-              `mappend` defaultPostCtx
+              <> listField "posts" defaultPostCtx (return posts)
+              <> defaultContext
+              <> defaultPostCtx
 
       pandocCompiler
         >>= saveSnapshot "content"
         >>= loadAndApplyTemplate "templates/post.html" otherBlogPostsCtx
         >>= relativizeUrls
 
+  -- index.html post filling
   match "index.html" $ do
     route idRoute
     compile $ do
       posts <- recentFirst =<< loadAllSnapshots "posts/*" "content"
       let indexCtx =
             listField "posts" teaserCtx (return (take 1 posts))
-              `mappend` defaultContext
+              <> defaultContext
 
       getResourceBody
         >>= applyAsTemplate indexCtx
         >>= loadAndApplyTemplate "templates/index.html" indexCtx
         >>= relativizeUrls
 
-  match "about.html" $ do
-    route idRoute
-    compile copyFileCompiler
+  -- about.html + robots.txt copied over
+  forM_ [ 
+    "robots.txt",
+    "about.html",
+    "assets/",
+    "assets/images/*"] 
+    $ \f -> match f $ do
+      route   idRoute
+      compile copyFileCompiler
 
+  -- fill blog page
   match "blog.html" $ do
     route idRoute
     compile $ do
       posts <- recentFirst =<< loadAll ("posts/*" .&&. hasVersion "production")
       let blogPostsCtx =
             listField "posts" defaultPostCtx (return posts)
-              `mappend` defaultContext
+              <> defaultContext
 
       getResourceBody
         >>= applyAsTemplate blogPostsCtx
         >>= loadAndApplyTemplate "templates/blog.html" blogPostsCtx
         >>= relativizeUrls
 
+  -- compile template bodies
   match "templates/**" $ compile templateBodyCompiler
 
 --------------------------------------------------------------------------------
+root :: String
+root = "https://jackdor.land"
+
 defaultPostCtx :: Context String
 defaultPostCtx =
-  dateField "date" "%B %e, %Y"
-    `mappend` defaultContext
+  constField "root" root
+    <> dateField "date" "%B %e, %Y"
+    <> defaultContext
 
 teaserCtx :: Context String
 teaserCtx =
-  teaserField "teaser" "content" `mappend` defaultPostCtx
+  teaserField "teaser" "content" <> defaultPostCtx
