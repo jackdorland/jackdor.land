@@ -31,12 +31,8 @@ jobs:
       env:
         cache-name: cache-cabal
       with:
-        path: ~/.cabal
-        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/*.cabal') }}-${{ hashFiles('**/cabal.project') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
+        path: ~/.stack-work
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('site.hs') }}
 
     - name: Upgrade stack
       run: stack upgrade
