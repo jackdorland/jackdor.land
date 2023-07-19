@@ -4,7 +4,7 @@ author: 'Jack Dorland'
 date: 'March 31st, 2023'
 ---
 
-It happens to be the 6 Month Anniversary of owning a Uni a-gel Switch today!
+It happens to be the 6 Month Anniversary of owning a Uni a-gel Switch today! <!--more-->
 
 This pencil is spectacular for the price point. At $12, it's actually kind of a bargain for the usability, comfort and strong construction of this pencil. This pencil has been my daily writer (having used the DelGuard for doing Math) for around six months at this point, coincidentally the same as my DelGuard.
 

@@ -46,17 +46,17 @@ main = hakyll $ do
     route idRoute
     compile compressCssCompiler
 
-  match "posts/*.md" $ version "init" $ do
+  match "posts/*.md" $ version "staging" $ do
     route $ setExtension "html"
     compile $ do
       pandocCompiler
         >>= saveSnapshot "content"
         >>= relativizeUrls
 
-  match "posts/*.md" $ version "final" $ do
+  match "posts/*.md" $ version "production" $ do
     route $ setExtension "html"
     compile $ do
-      posts <- recentFirst =<< loadAllSnapshots ("posts/*" .&&. hasVersion "init") "content"
+      posts <- recentFirst =<< loadAllSnapshots ("posts/*" .&&. hasVersion "staging") "content"
       let otherBlogPostsCtx =
             dateField "date" "%B %e, %Y"
               `mappend` listField "posts" defaultPostCtx (return posts)
@@ -81,10 +81,14 @@ main = hakyll $ do
         >>= loadAndApplyTemplate "templates/index.html" indexCtx
         >>= relativizeUrls
 
+  match "about.html" $ do
+    route idRoute
+    compile copyFileCompiler
+
   match "blog.html" $ do
     route idRoute
     compile $ do
-      posts <- recentFirst =<< loadAll ("posts/*" .&&. hasVersion "final")
+      posts <- recentFirst =<< loadAll ("posts/*" .&&. hasVersion "production")
       let blogPostsCtx =
             listField "posts" defaultPostCtx (return posts)
               `mappend` defaultContext

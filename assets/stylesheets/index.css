@@ -131,10 +131,11 @@ footer p {
 .is > .jp {
     transform: rotate(-10.43deg);
     margin-top: -0.2em;
+    font-size: 36px
 }
 
 .jp-header {
-    font-size: 40px;
+    font-size: 45px;
 }
 
 nav {

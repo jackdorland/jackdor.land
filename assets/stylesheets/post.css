@@ -71,6 +71,7 @@ nav {
 article p {
     margin-bottom: 32px;
     font-size: 26px;
+    letter-spacing: -0.06em;
 }
 
 article {

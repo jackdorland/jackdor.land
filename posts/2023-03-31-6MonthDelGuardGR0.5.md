@@ -4,7 +4,7 @@ author: 'Jack Dorland'
 date: 'March 31st, 2023'
 ---
 
-So, I've been essentially torturing a Zebra DelGuard Type-GR 0.5mm for a few months now. Constant use, almost every single day. I'll say this about it...it's just not an interesting pencil for the price point.
+So, I've been essentially torturing a Zebra DelGuard Type-GR 0.5mm for a few months now. Constant use, almost every single<!--more--> day. I'll say this about it...it's just not an interesting pencil for the price point.
 
 Let's start with what I like.... which is the main selling point of the DelGuard: An automatic system which prevents lead breakage through a combination of a guide pipe & internal "load balancer" spring system. It's amazing, and works really well out of the box. The lead is so hard to break, meaning Zebra has definitely made sound engineering decisions here- and after 6 months of constant usage, this feature's efficacy hasn't depreciated at all. It's just as strong as it was day-one.
 
