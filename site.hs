@@ -41,7 +41,7 @@ main = hakyll $ do
       let otherBlogPostsCtx =
             dateField "date" "%B %e, %Y"
               <> listField "posts" defaultPostCtx (return posts)
-              <> defaultContext
+              <> teaserField "teaser" "content"
               <> defaultPostCtx
 
       pandocCompiler
@@ -65,8 +65,9 @@ main = hakyll $ do
 
   match
     ( "robots.txt"
-        .||. "assets/images/*"
+        .||. "assets/images/**"
         .||. "assets/*"
+        .||. "assets/svg/*"
     )
     $ do
       route idRoute

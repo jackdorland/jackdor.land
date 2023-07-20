@@ -13,7 +13,7 @@ ul {
     list-style-type: none;
 }
 
-nav ul > li:first-of-type {
+nav ul>li:first-of-type {
     padding-top: 8px;
 }
 
@@ -25,7 +25,7 @@ footer {
     margin-left: -27px;
 }
 
-#copyright + br {
+#copyright+br {
     margin-bottom: 5px;
 }
 
@@ -68,7 +68,7 @@ footer p {
 
 #recent-blog-posts {
     background-repeat: no-repeat;
-    background-image: url("../images/card.svg");
+    background-image: url("../svg/card.svg");
     transform: rotate(-8.41deg);
     margin-top: -130px;
     margin-left: 300px;
@@ -118,17 +118,17 @@ footer p {
     height: 63px;
 }
 
-.is > p:not(.jp) {
+.is>p:not(.jp) {
     margin-top: 0.5em;
     line-height: 1.24em;
 }
 
-.is > .arrow {
+.is>.arrow {
     width: 83px;
     height: min-content;
 }
 
-.is > .jp {
+.is>.jp {
     transform: rotate(-10.43deg);
     margin-top: -0.2em;
     font-size: 36px
@@ -165,7 +165,7 @@ nav {
     border-radius: 30px;
 }
 
-.paper > img {
+.paper>img {
     z-index: -1;
     filter: drop-shadow(3px 3px 10px rgba(0, 0, 0, 0.2));
     user-select: none;

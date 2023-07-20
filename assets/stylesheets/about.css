@@ -2,8 +2,9 @@ body {
     padding: 3rem 14.5rem;
     padding-bottom: 0;
 }
+
 #paper {
-    background-image: url("../images/paper-lower.svg");
+    background-image: url("../svg/paper-lower.svg");
     margin: 0 auto;
     padding-right: 6rem;
     padding-left: 6rem;
@@ -14,7 +15,7 @@ body {
 }
 
 #header-container {
-    background: url("../images/paper-header.svg");
+    background: url("../svg/paper-header.svg");
     margin: 0 auto;
     padding: 3rem 6rem;
     padding-bottom: 2rem;
@@ -24,7 +25,7 @@ body {
 }
 
 #container-row {
-    display : block;
+    display: block;
     width: 100%;
 }
 
@@ -68,7 +69,7 @@ a {
     margin: -7px 0 0 0;
 }
 
-.jp-header + p {
+.jp-header+p {
     margin: -7px 0 0 0;
     padding: 0;
 }
