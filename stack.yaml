@@ -1,4 +1,4 @@
-resolver: lts-20.18  # Adapt this as needed
+resolver: lts-20.13  # Adapt this as needed
 packages:
   - .
 extra-deps:

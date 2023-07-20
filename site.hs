@@ -3,7 +3,6 @@
 
 import Data.Monoid (mappend)
 import Hakyll
-import Data.Foldable (forM_)
 
 --------------------------------------------------------------------------------
 main :: IO ()
@@ -12,7 +11,7 @@ main = hakyll $ do
   create ["sitemap.xml"] $ do
     route idRoute
     compile $ do
-      posts <- recentFirst =<< loadAll "posts/*"
+      posts <- recentFirst =<< loadAll ("posts/*" .&&. hasVersion "production")
       singlePages <- loadAll (fromList ["blog.html", "index.html", "about.html", "robots.html"])
 
       let pages = posts <> singlePages
@@ -64,15 +63,22 @@ main = hakyll $ do
         >>= loadAndApplyTemplate "templates/index.html" indexCtx
         >>= relativizeUrls
 
-  -- about.html + robots.txt copied over
-  forM_ [ 
-    "robots.txt",
-    "about.html",
-    "assets/",
-    "assets/images/*"] 
-    $ \f -> match f $ do
-      route   idRoute
+  match
+    ( "robots.txt"
+        .||. "assets/images/*"
+        .||. "assets/*"
+    )
+    $ do
+      route idRoute
       compile copyFileCompiler
+
+  -- template static files
+  match (fromList ["about.html"]) $ do
+    route idRoute
+    compile $ do
+      getResourceBody
+        >>= loadAndApplyTemplate "templates/about.html" defaultContext
+        >>= relativizeUrls
 
   -- fill blog page
   match "blog.html" $ do
@@ -91,6 +97,25 @@ main = hakyll $ do
   -- compile template bodies
   match "templates/**" $ compile templateBodyCompiler
 
+  -- atom/rss
+  create ["atom.xml"] $ do
+    route idRoute
+    compile $ do
+      let feedCtx = defaultPostCtx `mappend` bodyField "description"
+      posts <-
+        fmap (take 10) . recentFirst
+          =<< loadAllSnapshots ("posts/*" .&&. hasVersion "production") "content" 
+      renderAtom feedConfiguration feedCtx posts
+
+  create ["rss.xml"] $ do
+    route idRoute
+    compile $ do
+      let feedCtx = defaultPostCtx `mappend` bodyField "description"
+      posts <-
+        fmap (take 10) . recentFirst
+          =<< loadAllSnapshots ("posts/*" .&&. hasVersion "production") "content" 
+      renderRss feedConfiguration feedCtx posts
+
 --------------------------------------------------------------------------------
 root :: String
 root = "https://jackdor.land"
@@ -104,3 +129,13 @@ defaultPostCtx =
 teaserCtx :: Context String
 teaserCtx =
   teaserField "teaser" "content" <> defaultPostCtx
+
+feedConfiguration :: FeedConfiguration
+feedConfiguration =
+  FeedConfiguration
+    { feedTitle = "pens, pencils & politics",
+      feedDescription = "Posts about pens, pencils, and - you guessed it - American politics!",
+      feedAuthorName = "Jack Dorland",
+      feedAuthorEmail = "jackdor.land",
+      feedRoot = "https://jackdor.land"
+    }
