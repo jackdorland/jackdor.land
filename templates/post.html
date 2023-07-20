@@ -18,34 +18,39 @@
 </head>
 
 <body>
-  <div id="paper">
-    <header>
-      <div>
-        <p class="jp-header">ジャック・どろぁんど</p>
-        <p>jack "kai" dorland (he/they)</p>
-      </div>
-      <nav>
-        <a href="/">home</a> ~
-        <a href="/about.html">about</a> ~
-        <a href="/blog.html">blog</a>
-      </nav>
-    </header>
-    <main>
-      <article id="post">
-        <h1>$title$</h1><br>
-        <h3>$author$ ~ Posted $date$</h3>
-        <span id="article">$body$ </span>
-      </article>
-      <aside>
-        <img id="polaroid" src="/assets/images/776CB88B-55FF-47B1-918D-37A866FF0D0A-2.jpg">
-        <div class="other-articles">
-          <h3>Other Articles</h3>
-          $partial("templates/partials/other-posts.html")$
-
+  <div id="container-row">
+    <div id="header-container">
+      <header>
+        <div>
+          <p class="jp-header">ジャック・どろぁんど</p>
+          <p>jack "kai" dorland (he/they)</p>
         </div>
-      </aside>
-    </main>
+        <nav>
+          <a href="/">home</a> ~
+          <a href="/about.html">about</a> ~
+          <a href="/blog.html">blog</a>
+        </nav>
+      </header>
+    </div>
+    <div id="paper">
+      <main>
+        <article id="post">
+          <h1>$title$</h1><br>
+          <h3>$author$ ~ Posted $date$</h3>
+          <span id="article">$body$ </span>
+        </article>
+        <aside>
+          <img id="polaroid" src="/assets/images/776CB88B-55FF-47B1-918D-37A866FF0D0A-2.jpg">
+          <div class="other-articles">
+            <h3>Other Articles</h3>
+            $partial("templates/partials/other-posts.html")$
+
+          </div>
+        </aside>
+      </main>
+    </div>
   </div>
+
 </body>
 
 </html>
