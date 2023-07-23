@@ -4,12 +4,27 @@ body {
 }
 
 #paper {
-    background-image: url("../svg/paper2.svg");
+    background-image: url("../svg/paper-lower.svg");
     margin: 0 auto;
-    padding: 3rem 6rem;
+    padding-right: 5rem;
+    padding-left: 6.5rem;
+    padding-bottom: 3rem;
     width: 100%;
-    height: 100%;
-    border-radius: 29px 29px 0px 0px;
+    height: fit-content;
+    border-radius: 0px 0px 29px 20px;
+}
+
+#header-container {
+    background: url("../svg/paper-header.svg");
+    margin: 0 auto;
+    padding: 3rem 5rem 2rem 6.5rem;
+    width: 100%;
+    height: fit-content;
+    border-radius: 29px 29px 0px 0px
+}
+
+#container-row {
+    display: block;
 }
 
 header {
@@ -65,8 +80,7 @@ a {
 #featured-link {
     text-align: center;
     display: block;
-    margin-top: 20px;
-    padding-top: .3em;
+
     width: 100%;
     color: #0729C8;
 }

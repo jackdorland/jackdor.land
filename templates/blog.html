@@ -18,43 +18,48 @@
 </head>
 
 <body>
-  <div id="paper">
+  <div id="container-row">
     <div class="content">
-      <header>
-        <div>
-          <p class="jp-header">ジャック・どろぁんど</p>
-          <p>jack "kai" dorland (he/they)</p>
-        </div>
-        <nav>
-          <a href="/">home</a> ~
-          <a href="/about.html">about</a> ~
-          <a href="#">blog</a>
-        </nav>
-      </header>
-      <section id="featured-link">
-        <a href="" rel="external noopener noreferrer">Writing Utensil Rating Spreadsheet</a>
-      </section>
-      <main>
-        <section id="posts">
-          <h1>pens, pencils, &amp; politics</h1>
-          $partial("templates/partials/post-list.html")$
+      <div id="header-container">
+        <header>
+          <div>
+            <p class="jp-header">ジャック・どろぁんど</p>
+            <p>jack "kai" dorland (he/they)</p>
+          </div>
+          <nav>
+            <a href="/">home</a> ~
+            <a href="/about.html">about</a> ~
+            <a href="#">blog</a>
+          </nav>
+        </header>
+      </div>
+      <div id="paper">
+        <section id="featured-link">
+          <a href="" rel="external noopener noreferrer">Writing Utensil Rating Spreadsheet</a>
         </section>
-        <aside id="past-posts">
-          <h1>past posts</h1>
-          <ul>
-            <li>April 2023</li>
-            <li>May 2023</li>
-            <li>June 2023</li>
-            <li>July 2023</li>
-            <li>August 2023</li>
-            <li>September 2023</li>
-            <li>October 2023</li>
-            <li>November 2023</li>
-            <li>December 2023</li>
-          </ul>
-        </aside>
-      </main>
+        <main>
+          <section id="posts">
+            <h1>pens, pencils, &amp; politics</h1>
+            $partial("templates/partials/post-list.html")$
+          </section>
+          <aside id="past-posts">
+            <h1>past posts</h1>
+            <ul>
+              <li>April 2023</li>
+              <li>May 2023</li>
+              <li>June 2023</li>
+              <li>July 2023</li>
+              <li>August 2023</li>
+              <li>September 2023</li>
+              <li>October 2023</li>
+              <li>November 2023</li>
+              <li>December 2023</li>
+            </ul>
+          </aside>
+        </main>
+      </div>
     </div>
+
   </div>
 </body>
 

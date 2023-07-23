@@ -1,6 +1,6 @@
 --------------------------------------------------------------------------------
 {-# LANGUAGE OverloadedStrings #-}
-
+{-# LANGUAGE CPP #-}
 import Data.Monoid (mappend)
 import Hakyll
 
@@ -17,7 +17,7 @@ main = hakyll $ do
       let pages = posts <> singlePages
           sitemapCtx =
             constField "root" root
-              <> listField "pages" defaultPostCtx (return pages)
+              <> listField "pages" postCtx (return pages)
       makeItem ""
         >>= loadAndApplyTemplate "templates/sitemap.xml" sitemapCtx
 
@@ -40,9 +40,9 @@ main = hakyll $ do
       posts <- recentFirst =<< loadAllSnapshots ("posts/*" .&&. hasVersion "staging") "content"
       let otherBlogPostsCtx =
             dateField "date" "%B %e, %Y"
-              <> listField "posts" defaultPostCtx (return posts)
+              <> listField "posts" postCtx (return posts)
               <> teaserField "teaser" "content"
-              <> defaultPostCtx
+              <> postCtx
 
       pandocCompiler
         >>= saveSnapshot "content"
@@ -56,6 +56,7 @@ main = hakyll $ do
       posts <- recentFirst =<< loadAllSnapshots "posts/*" "content"
       let indexCtx =
             listField "posts" teaserCtx (return (take 1 posts))
+              <> constField "compiletime" compiletime
               <> defaultContext
 
       getResourceBody
@@ -63,6 +64,7 @@ main = hakyll $ do
         >>= loadAndApplyTemplate "templates/index.html" indexCtx
         >>= relativizeUrls
 
+  -- asset compilation
   match
     ( "robots.txt"
         .||. "assets/images/**"
@@ -73,7 +75,7 @@ main = hakyll $ do
       route idRoute
       compile copyFileCompiler
 
-  -- template static files
+  -- template files
   match (fromList ["about.html"]) $ do
     route idRoute
     compile $ do
@@ -87,7 +89,7 @@ main = hakyll $ do
     compile $ do
       posts <- recentFirst =<< loadAll ("posts/*" .&&. hasVersion "production")
       let blogPostsCtx =
-            listField "posts" defaultPostCtx (return posts)
+            listField "posts" postCtx (return posts)
               <> defaultContext
 
       getResourceBody
@@ -102,7 +104,7 @@ main = hakyll $ do
   create ["atom.xml"] $ do
     route idRoute
     compile $ do
-      let feedCtx = defaultPostCtx `mappend` bodyField "description"
+      let feedCtx = postCtx `mappend` bodyField "description"
       posts <-
         fmap (take 10) . recentFirst
           =<< loadAllSnapshots ("posts/*" .&&. hasVersion "production") "content" 
@@ -111,7 +113,7 @@ main = hakyll $ do
   create ["rss.xml"] $ do
     route idRoute
     compile $ do
-      let feedCtx = defaultPostCtx `mappend` bodyField "description"
+      let feedCtx = postCtx `mappend` bodyField "description"
       posts <-
         fmap (take 10) . recentFirst
           =<< loadAllSnapshots ("posts/*" .&&. hasVersion "production") "content" 
@@ -121,15 +123,19 @@ main = hakyll $ do
 root :: String
 root = "https://jackdor.land"
 
-defaultPostCtx :: Context String
-defaultPostCtx =
+compiletime :: String
+compiletime = __DATE__
+
+postCtx :: Context String
+postCtx =
   constField "root" root
     <> dateField "date" "%B %e, %Y"
     <> defaultContext
 
 teaserCtx :: Context String
 teaserCtx =
-  teaserField "teaser" "content" <> defaultPostCtx
+  teaserField "teaser" "content" 
+    <> postCtx
 
 feedConfiguration :: FeedConfiguration
 feedConfiguration =
