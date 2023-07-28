@@ -140,7 +140,7 @@ teaserCtx =
 feedConfiguration :: FeedConfiguration
 feedConfiguration =
   FeedConfiguration
-    { feedTitle = "pens, pencils & politics",
+    { feedTitle = "pens, pencils and politics",
       feedDescription = "Posts about pens, pencils, and - you guessed it - American politics!",
       feedAuthorName = "Jack Dorland",
       feedAuthorEmail = "jackdor.land",
