@@ -1,3 +1,5 @@
 User-Agent: *
 Sitemap: https://jackdor.land/sitemap.xml
+User-agent: GPTBot
+Disallow: /
 
